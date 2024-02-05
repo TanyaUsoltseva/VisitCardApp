@@ -1,0 +1,74 @@
+<div class="body-about-style container">
+  <div class="text-center">
+    <section class="section-about container d-flex align-items-center">
+      <div class="">
+        <div class="decor"></div>
+        <h2 class="text-white text-about">Тишина — единственный простор,<br> где Дух расправляет крылья.</h2>
+      </div>
+    </section>
+
+    <section class="container mt-5">
+      <div class="bg-light p-5 rounded-5">
+        <h2 class="title-about-section">Lorem ipsum dolor sit amet consectetur,<br> adipisicing elit.</h2>
+
+        <p class="m-5" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi totam autem iste culpa, commodi eius minus explicabo accusantium amet. Laboriosam cumque officia ullam facilis soluta pariatur est mollitia! Dicta, molestiae. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam atque quas numquam itaque, non neque quidem quaerat delectus reprehenderit animi similique adipisci odit, quae molestiae laborum repudiandae ipsa recusandae architecto! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa pariatur beatae dolore cum tenetur! Assumenda dolore aut necessitatibus quo possimus dolorem iusto, sit, neque iste sequi velit voluptatibus, tenetur delectus?</p>
+        <p class="m-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus explicabo ab vitae culpa veritatis, reiciendis, eligendi at libero non impedit facilis nihil quos aliquid doloribus quas temporibus modi ex optio.</p>
+        <p class="m-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium eveniet deleniti quod ullam qui ex recusandae ut saepe atque adipisci soluta, voluptatum alias quia dolorum autem ratione amet minus. Modi.</p>
+
+      </div>
+
+    </section>
+
+
+    <section class="container mt-5">
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active ">
+              <div class="d-flex justify-content-around">
+                <app-card-product
+                *ngFor="let product of products.slice(0, 5) | filterProducts: term; let i = index"
+                [product]="product"
+                [ngClass]="{
+                  'active': i === 0
+                }"
+                >
+              </app-card-product>
+              </div>
+            </div>
+            <div class="carousel-item ">
+              <div class="d-flex justify-content-around">
+                <app-card-product
+                *ngFor="let product of products.slice(5) | filterProducts: term; let i = index"
+                [product]="product"
+                [ngClass]="{
+                  'active': i === 0
+                }"
+                >
+              </app-card-product>
+              </div>
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Предыдущий</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Следующий</span>
+        </button>
+      </div>
+    </section>
+
+    <app-carousel></app-carousel>
+
+    <!-- <div class="d-flex justify-content-around flex-wrap mt-5" *ngIf="products">
+
+      <app-card-product
+      *ngFor="let product of products | filterProducts: term; let i = index"
+      [product]="product"
+      >
+    </app-card-product>
+    </div> -->
+  </div>
+</div>
