@@ -10,7 +10,7 @@
       <div class="card-product mb-2 "
             *ngFor="let item of favorites">
         <div class="card-img d-flex align-items-center">
-          <img [src]="item.image"
+          <img src="http://localhost:3000/public/{{item.image}}"
           [alt]="item.title"
           class="mb-2 card-img-top rounded">
         </div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { products } from 'src/app/data/products';
 import { IProduct } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -10,13 +10,28 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartPageComponent implements OnInit{
   cart: IProduct[] = [];
-  cartSubscription: Subscription;
-  details = false
+  details = false;
+  sumOfProducts: number;
   constructor(private cartService: CartService){
 
   }
 
   ngOnInit(): void {
     this.cart = this.cartService.getProducts();
-    }
+    this.cartService.elements$.subscribe(() => this.cart = this.cartService.products) ;
+    this.sumUpdate();
+  }
+
+  sumUpdate(): void {
+    this.sumOfProducts = this.cart.reduce((acc,item) => {
+      return acc + item.forAllPrice;
+    }, 0)
+  }
+
+
+
+  submitOrder(): void {
+
+  }
+
 }

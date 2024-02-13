@@ -15,7 +15,7 @@
     <div class="body-style" *ngIf="products$ | async as products">
 
         <app-card-product
-        *ngFor="let product of products | filterProducts: term; let i = index"
+        *ngFor="let product of products$ | async filterProducts: term; let i = index"
         [product]="product"
         >
       </app-card-product>

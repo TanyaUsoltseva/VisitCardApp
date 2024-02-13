@@ -1,3 +1,5 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
 @font-face {
   font-family: Madetheartist;
   src: url(assets/fonts/madetheartistscript/Madetheartistscript.ttf) format("opentype");
@@ -33,4 +35,19 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+a {
+  color: var(--gray-400-ground)!important;
+  text-decoration: none!important;
+}
+
+
+.p-tabview .p-tabview-panels, .p-tabview-nav{
+  background: #ffffff00;
+  border: none
+}
+
+.p-tabview .p-tabview-nav li {
+  border: none
 }

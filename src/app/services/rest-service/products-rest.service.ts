@@ -18,17 +18,29 @@ export class ProductsRestService {
     ){
   }
   getAll(): Observable<IProduct[]> {
-   return this.http.get<IProduct[]>('https://fakestoreapi.com/products', {
-    params : new HttpParams(). append('limit', 10)
-   }).pipe(
-    retry(2),
-    catchError(this.errorHandler.bind(this))
-   )
+   return this.http.get<IProduct[]>('http://localhost:3000/products/');
   }
 
   private errorHandler(error: HttpErrorResponse) {
     this.errorService.handle(error.message)
     return throwError(() => error.message)
 
+  }
+
+  getProductById(id: string): Observable<IProduct> {
+    return this.http.get<IProduct>("http://localhost:3000/product-page/"+id);
+  }
+
+
+  // initProduct(): Observable<IProduct[]> {
+  //   return this.http.post<IProduct[]>("http://localhost:3000/product-page/", {});
+  // }
+
+  deleteProduct(): Observable<Object>{
+    return this.http.delete("http://localhost:3000/product-page/");
+  }
+
+  createProduct(body: any): Observable<any> {
+    return this.http.post("http://localhost:3000/product-item/", body)
   }
 }

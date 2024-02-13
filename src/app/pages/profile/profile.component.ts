@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
+  constructor() { }
+  isTabCaching: boolean = false;
+
+  ngOnInit(): void {
+  }
+
 
 }

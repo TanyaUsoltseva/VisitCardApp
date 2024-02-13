@@ -1,0 +1,58 @@
+<div class="margin-top">
+  <div class="mt-4">
+    <h4>Создание карточки товара</h4>
+    <div class="mt-3 user-info" [formGroup]="productForm">
+      <div class="mt-3">
+        <span class="mx-3">Название товара</span>
+        <input type="text"
+               class="mt-3"
+               formControlName="name"
+               pInputText
+        />
+      </div>
+      <div class="mt-3">
+        <span class="mx-3">Описание товара</span>
+        <input type="text"
+               class="mt-3"
+               formControlName="description"
+               pInputText
+        />
+      </div>
+
+      <div class="mt-3">
+        <span class="mx-3">Категория</span>
+        <input type="text"
+               class="mt-3"
+               formControlName="category"
+               pInputText
+        />
+      </div>
+
+      <div class="mt-3">
+        <span class="mx-3">Стоимость</span>
+        <input type="text"
+               class="mt-3"
+               formControlName="price"
+               pInputText
+        />
+      </div>
+
+      <div class="mt-3">
+        <span class="mx-3">Изображение</span>
+        <input type="file"
+               class="mt-3"
+               (change)="selectFile($event)"
+
+               pInputText
+        />
+      </div>
+
+      <div class="mt-4">
+        <button class="btn-success btn" type="submit"
+                (click)="createCard()"
+                [disabled]="!productForm.valid">Создать карточку товара</button>
+      </div>
+
+    </div>
+  </div>
+</div>

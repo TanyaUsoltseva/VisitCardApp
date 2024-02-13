@@ -26,7 +26,7 @@
             <div class="carousel-item active ">
               <div class="d-flex justify-content-around">
                 <app-card-product
-                *ngFor="let product of products.slice(0, 5) | filterProducts: term; let i = index"
+                *ngFor="let product of products | filterProducts: term; let i = index"
                 [product]="product"
                 [ngClass]="{
                   'active': i === 0

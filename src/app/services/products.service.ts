@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IProduct } from "../models/product";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { ProductsRestService } from "./rest-service/products-rest.service";
 
 
@@ -17,8 +17,21 @@ export class ProductsService {
 
   getProducts(): void {
     this.productsRestService.getAll().subscribe((data) =>{
-      this.products$.next(data)
+      const list = data.map((item) => {
+        item.forAllPrice = item.price;
+        item.count = 1;
+        return item;
+      })
+      this.products$.next(list)
     })
+  }
+
+  getTicketById(id: string): Observable<IProduct>{
+    return this.productsRestService.getProductById(id);
+  }
+
+  createProducts (body: any) {
+    return this.productsRestService.createProduct(body)
   }
 
 }
