@@ -8,6 +8,7 @@ export interface IProduct {
   favorite?: boolean,
   count?: number,
   forAllPrice: number,
+  _id: string,
   rating: {
     rate: number,
     count: number

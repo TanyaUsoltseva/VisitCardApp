@@ -17,6 +17,7 @@ export class RegistrationComponent implements OnInit {
   selectedValue = false;
   saveUserInStore: boolean;
 
+
   constructor(private messageService: MessageService,
               private http: HttpClient,
               ) { }
@@ -25,7 +26,11 @@ export class RegistrationComponent implements OnInit {
 
   }
 
+
   registration(ev: Event): void | boolean {
+
+
+
     console.log(this.selectedValue)
     if (this.psw !== this.pswRepeat){
       this.messageService.add({severity:'error', summary:'Пароли не совпадают'});

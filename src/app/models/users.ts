@@ -4,6 +4,7 @@ export interface IUser {
   psw: string,
   cardNumber?: string;
   id?: string;
+  _id?: string;
 
 }
 

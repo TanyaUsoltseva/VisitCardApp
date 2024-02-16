@@ -9,11 +9,118 @@
       <div *ngIf="!cart.length; else cartFull">Корзина пуста...</div>
       <ng-template #cartFull>
         <app-card-product *ngFor="let product of cart" (sumUpdate)="sumUpdate()" [product]="product" [hideCart]="false"></app-card-product>
+        <div>Итого: {{sumOfProducts}} руб.</div>
+
+
+        <!-- Кнопка-триггер модального окна -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Оформить заказ
+        </button>
       </ng-template>
 
-      <div>Итого: {{sumOfProducts}} руб.</div>
 
-      <button class="btn btn-outline-secondar">Оформить заказ</button>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabelToggleLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Оформление заказа </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body"
+           [formGroup]="orderForm"
+           >
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">ФИО</span>
+          <input type="text"
+                 class="form-control"
+                 placeholder="Введите ваше имя"
+                 aria-label="Имя пользователя"
+                 aria-describedby="basic-addon1"
+                 pInputText
+                 [ngClass]="{'input-error': !name}"
+                 formControlName="name"
+                 >
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Адрес доставки</span>
+          <input type="text"
+                 class="form-control"
+                 placeholder="Введите адрес"
+                 aria-label="Имя пользователя"
+                 aria-describedby="basic-addon1"
+                 pInputText
+                 [ngClass]="{'input-error': !address}"
+                 formControlName="address"
+                 >
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Телефон</span>
+          <input type="tel"
+                 class="form-control"
+                 placeholder="Контактный номер"
+                 aria-label="Имя пользователя"
+                 aria-describedby="basic-addon1"
+                 pInputText
+                 [ngClass]="{'input-error': !telephone}"
+                 formControlName="telephone"
+                 >
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="email"
+                 class="form-control"
+                 placeholder="Введите вашу почту"
+                 aria-label="Imail"
+                 aria-describedby="basic-addon2"
+                 pInputText
+                 [ngClass]="{'input-error': !mail}"
+                 formControlName="mail"
+                 >
+          <span class="input-group-text" id="basic-addon2"></span>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text">Комментарии к заказу</span>
+          <textarea class="form-control"
+           aria-label="Введите сообщение"
+           formControlName="message"
+           ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Закрыть</button>
+        <button type="button"
+                data-bs-target="#exampleModalToggle2"
+                data-bs-toggle="modal"
+                class="btn btn-primary"
+                (click)="submitOrder()"
+                >Оформить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle2" data-bs-config={backdrop:true} aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" *ngIf="order">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Заказ № {{order.orderNumber}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        Спасибо за заказ!
+      </div>
+      <div class="modal-footer">
+        <button (click)="clearCart()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </div>

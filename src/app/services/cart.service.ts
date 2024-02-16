@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../models/product';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -50,4 +50,9 @@ export class CartService {
       return [];
     }
   }
+
+  updateCart(): void {
+    this.products = [];
+    this.elements$.next(this.products.length);
+   }
 }

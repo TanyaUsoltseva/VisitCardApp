@@ -10,6 +10,8 @@ export class UserService {
 
   user$ = new BehaviorSubject<IUser | null>(null);
 
+  // private user: IUser;
+
   private token: string;
 
   constructor( private storageService: StorageService) { }
@@ -30,5 +32,7 @@ export class UserService {
   getToken(): string {
     return this.token;
   }
+
+
 
 }
