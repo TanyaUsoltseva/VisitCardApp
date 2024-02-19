@@ -1,6 +1,6 @@
 
 import { Injectable } from "@angular/core";
-import { Observable, catchError, map, retry, throwError } from "rxjs";
+import { Observable, map, retry, throwError } from "rxjs";
 import { IProduct } from "src/app/models/product";
 import { ErrorService } from "../error.service";
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
@@ -33,10 +33,6 @@ export class ProductsRestService {
   }
 
 
-  // initProduct(): Observable<IProduct[]> {
-  //   return this.http.post<IProduct[]>("http://localhost:3000/product-page/", {});
-  // }
-
   deleteProduct(): Observable<Object>{
     return this.http.delete("http://localhost:3000/product-page/");
   }
@@ -45,9 +41,6 @@ export class ProductsRestService {
     return this.http.post("http://localhost:3000/product-item/", body)
   }
 
-  // createOrder(data: IOrder): Observable<any> {
-  //   return this.http.post<{id: string}>("http://localhost:3000/order/", data)
-  // }
 
   createOrder(data: IOrder): Observable<any> {
     return this.http.post<{id: string}>("http://localhost:3000/order/", data).pipe(

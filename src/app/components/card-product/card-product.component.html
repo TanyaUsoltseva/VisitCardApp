@@ -1,5 +1,7 @@
+<!--Карточка каталога-->
 <ng-container *ngIf="hideCart; else cart">
-  <div class="d-flex flex-wrap justify-content-around ">
+
+  <div class="d-flex flex-wrap justify-content-around a">
 
     <div class="card-product  card m-4  p-2">
       <div class="card-img d-flex align-items-center bg-white rounded-5">
@@ -29,7 +31,8 @@
 
 
       <div class="d-flex justify-content-between">
-        <button class="py-2 px-3 rounded  btn"
+        <button class="py-2 px-3 rounded btn"
+        [disabled]="isExist(product)"
         (click)="addToCart(product)"
         >
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
@@ -54,23 +57,28 @@
   </div>
 </ng-container>
 
+<!-- Карточка корзины -->
+
 <ng-template #cart>
-  <div class="d-flex flex-column">
 
-    <div class="card p-3 mb-2 d-flex flex-row align-items-center">
+  <div class="d-flex flex-column m-3">
 
-      <div class="d-flex align-items-center cart-img">
+    <div class="card p-5 mb-3 d-flex flex-row  align-items-stretch justify-content-between">
+
+      <div class="d-flex align-items-center img-container">
         <img src="http://localhost:3000/public/{{product.image}}"
-        [alt]="product.title"
-        class="mb-2 rounded img-card">
+             [alt]="product.title"
+             class="mb-2 rounded img-card">
       </div>
 
-      <div class="d-flex flex-column w-75">
+      <div class="d-flex flex-column justify-content-around">
 
-        <h3 class="w-100 fs-6 card-title">{{ product.title }}</h3>
+        <h3 class="w-100 fs-3 card-title mb-3">{{ product.title }}</h3>
+
+        <p class="fs-5 mb-3 "> {{ product.description }}</p>
 
         <div>
-          <button
+          <!-- <button
           class=" py-2 px-4 rounded  btn border-0"
           [ngClass]="{
             'btn-outline-dark': !details,
@@ -80,39 +88,41 @@
           >
 
             {{ details ? 'Скрыть' : 'Показать' }} детали
-          </button>
+          </button> -->
 
-          <div *ngIf="details">
+          <!-- <div *ngIf="details">
             <p> {{ product.description }}</p>
+          </div> -->
+
+          <div class="d-flex">
+            <button [disabled]="product.count === 1" type="button" class="" (click)="countProduct(false, product)">-</button>
+            <input class="input-count"
+                   type="text"
+                   min="1"
+                   [value]="product.count"
+                   [(ngModel)]='product.count'
+                   (change)="countChange(product)"
+                   >
+            <button type="button" class="btn-outline-dark" (click)="countProduct(true, product)">+</button>
           </div>
 
         </div>
       </div>
-      <div class="d-flex">
-        <button [disabled]="count === 1" type="button" class="" (click)="countProduct(false)">-</button>
-        <input class="input-count"
-               type="number"
-               min="1"
-               [value]="count"
-               [(ngModel)]='count'
-               (change)="countChange()"
-               >
-        <button type="button" class="btn-outline-dark" (click)="countProduct(true)">+</button>
-      </div>
 
-
-      <div class="text-danger m-5 rounded text-">
-        <p>Цена: <span class="m-0">{{ product.forAllPrice }} руб.</span></p>
+      <div class=" m-3 fs-5 w-25 d-flex align-items-center justify-content-center">
+        Цена: {{ product.forAllPrice }} руб.
       </div>
 
       <button type="button"
               class="btn-close position-absolute top-10 end-5"
               aria-label="Закрыть"
-              (click)="removeToCart(product)"
+              data-bs-toggle="tooltip"
+              data-bs-placement="left"
+              data-bs-title="Удалить товар"
+              (click)="removeFromCart(product)"
               ></button>
     </div>
 
   </div>
 </ng-template>
-  <!--  -->
-  <!-- "details = !details" -->
+

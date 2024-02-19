@@ -1,3 +1,4 @@
+import { Role } from "./role";
 export interface IUser {
   login: string,
   email?: string,
@@ -5,6 +6,8 @@ export interface IUser {
   cardNumber?: string;
   id?: string;
   _id?: string;
+  role?: Role;
+  token? : string;
 
 }
 

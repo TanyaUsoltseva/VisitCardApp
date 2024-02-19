@@ -11,7 +11,7 @@ import { ProductsRestService } from 'src/app/services/rest-service/products-rest
 export class ProductPageComponent {
   title = 'VisitCardApp';
   loading = false
-  products$: Observable<IProduct[]>
+  products$: Observable<IProduct[]>;
   term = ''
 
   constructor(private productsRestService: ProductsRestService){
@@ -25,5 +25,7 @@ export class ProductPageComponent {
       tap(() => this.loading = false)
     )
   }
+
+
 }
 

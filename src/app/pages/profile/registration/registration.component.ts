@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
     const userObj: IUser = {
       psw: this.psw,
       login: this.login,
-      email: this.email
+      email: this.email,
     }
 
 

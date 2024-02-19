@@ -23,6 +23,10 @@ import { InputTextModule} from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
 import { AdminComponent } from './pages/admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessagesModule } from 'primeng/messages';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
 
 
 @NgModule({
@@ -52,7 +56,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     InputTextModule,
     TabViewModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MessagesModule,
+    CarouselModule,
+    ButtonModule,
+    TagModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

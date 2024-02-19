@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { IOrder } from 'src/app/models/order';
 import { IProduct } from 'src/app/models/product';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
-import { ProductsRestService } from 'src/app/services/rest-service/products-rest.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class CartPageComponent implements OnInit{
   constructor(private cartService: CartService,
               private orderService: OrderService,
               private userService: UserService,
-              private productRestService: ProductsRestService,
+              public authService: AuthService
     ){
 
   }
@@ -63,26 +63,17 @@ export class CartPageComponent implements OnInit{
 
     const userId = this.userService.user$.getValue()?.id || null;
 
-    // let formParams = new FormData();
-    // if(typeof orderDataRow === "object") {
-    //   for (let prop in orderDataRow) {
-    //     formParams.append(prop, orderDataRow[prop]);
-    //   }
-    // }
-
     const postObj: IOrder = {
       ...orderDataRow,
       ...{userId},
       ...{productId:postData},
     }
-    debugger
     this.orderService.createOrder(postObj).subscribe();
 
   }
 
   clearCart(): void {
-    // this.cart = [];
-    // this.sumUpdate();
     this.cartService.updateCart();
   }
+
 }

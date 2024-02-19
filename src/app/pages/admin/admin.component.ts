@@ -13,7 +13,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = new FormGroup( {
-      name: new FormControl('', {validators: Validators.required}),
+      title: new FormControl('', {validators: Validators.required}),
       description: new FormControl('', [Validators.required, Validators.minLength(2)]),
       category: new FormControl(),
       price: new FormControl(),

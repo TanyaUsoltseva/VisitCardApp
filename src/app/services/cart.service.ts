@@ -12,7 +12,7 @@ export class CartService {
   constructor() { }
 
   add(product: IProduct) {
-    const values = this.products.find((item) => item.id === product.id)
+    const values = this.products.find((item) => item._id === product._id)
 
     if(values){
       values.count = product.count;
@@ -20,12 +20,13 @@ export class CartService {
       this.products.push(product);
     }
       this.elements$.next(this.products.length);
+
       this.prepareToStorage();
 
   }
 
   remove(product: IProduct) {
-    this.products = this.products.filter((item) => item.id !== product.id);
+    this.products = this.products.filter((item) => item._id !== product._id);
     this.elements$.next(this.products.length);
     this.prepareToStorage();
   }
@@ -40,8 +41,11 @@ export class CartService {
     const data = localStorage.getItem("products");
     if (data?.length){
       this.products = JSON.parse(data).map((item: IProduct) => {
-        item.forAllPrice = item.price;
-        item.count = 1;
+
+        if (!item.forAllPrice) item.forAllPrice = item.price;
+        if (!item.count) {
+          item.count = 1;
+        }
         return item;
       })
       this.elements$.next(this.products.length);
@@ -54,5 +58,6 @@ export class CartService {
   updateCart(): void {
     this.products = [];
     this.elements$.next(this.products.length);
+    localStorage.removeItem('products');
    }
 }

@@ -6,7 +6,7 @@ export interface IProduct {
   category: string,
   image: string,
   favorite?: boolean,
-  count?: number,
+  count: number,
   forAllPrice: number,
   _id: string,
   rating: {

@@ -20,7 +20,8 @@
     </section>
 
 
-    <section class="container mt-5">
+    <section class="container mt-5 bg-light">
+      <h3>Новинки</h3>
       <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active ">
@@ -61,6 +62,22 @@
     </section>
 
     <app-carousel></app-carousel>
+
+    <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" [autoplayInterval]="3000">
+      <ng-template let-product pTemplate="item">
+          <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+              <div class="mb-3">
+                  <img src="http://localhost:3000/public/{{ product.image }}" [alt]="product.title" class="w-6 shadow-2" />
+              </div>
+              <div>
+                  <h4 class="mb-1">{{ product.title }}</h4>
+                  <h6 class="mt-0 mb-3">Цена: {{product.price }} руб.</h6>
+                  <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
+
+              </div>
+          </div>
+      </ng-template>
+  </p-carousel>
 
     <!-- <div class="d-flex justify-content-around flex-wrap mt-5" *ngIf="products">
 

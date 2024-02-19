@@ -1,6 +1,5 @@
-import { HttpParams } from '@angular/common/http';
+
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { IProduct } from 'src/app/models/product';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -12,6 +11,23 @@ import { ProductsService } from 'src/app/services/products.service';
 export class AboutPageComponent {
   products: IProduct[] = [];
   term = ''
+  responsiveOptions: any[] = [
+    {
+        breakpoint: '1199px',
+        numVisible: 1,
+        numScroll: 1
+    },
+    {
+        breakpoint: '991px',
+        numVisible: 2,
+        numScroll: 1
+    },
+    {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1
+    }
+];
 
   constructor(private productsService: ProductsService) {}
 
@@ -20,7 +36,26 @@ export class AboutPageComponent {
     this.productsService.products$.subscribe((data) => {
       this.products = data
       })
-
   }
+
+
+  getSeverity(status: string) {
+    switch (status) {
+        case 'INSTOCK':
+            return 'success';
+        case 'LOWSTOCK':
+            return 'warning';
+        case 'OUTOFSTOCK':
+            return 'danger';
+        default:
+          console.log("sfdf")
+          return 'default';
+          break;
+
+    }
+
+}
+
+
 }
 
