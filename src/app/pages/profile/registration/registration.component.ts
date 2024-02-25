@@ -28,23 +28,17 @@ export class RegistrationComponent implements OnInit {
 
 
   registration(ev: Event): void | boolean {
-
-
-
     console.log(this.selectedValue)
     if (this.psw !== this.pswRepeat){
       this.messageService.add({severity:'error', summary:'Пароли не совпадают'});
       return false;
     }
 
-
     const userObj: IUser = {
       psw: this.psw,
       login: this.login,
       email: this.email,
     }
-
-
 
     this.http.post<IUser>('http://localhost:3000/users/', userObj).subscribe((data) => {
       if (this.saveUserInStore) {
@@ -56,7 +50,7 @@ export class RegistrationComponent implements OnInit {
     }, (err: HttpErrorResponse)=> {
       console.log('err', err)
       const serverError = <ServerError>err.error;
-      this.messageService.add({severity:'warn', summary:'serverError.errorText'});
+      this.messageService.add({severity:'warn', summary:'Логин занят!'});
     });
 
   }

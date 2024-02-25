@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class AdminComponent implements OnInit {
   productForm: FormGroup;
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService,
+              private messageService: MessageService
+              ) { }
 
   ngOnInit(): void {
     this.productForm = new FormGroup( {
@@ -34,6 +37,7 @@ export class AdminComponent implements OnInit {
     }
 
     this.productService.createProducts(formParams).subscribe((data) => {});
+    this.messageService.add({severity:'success', summary:'Карточка успешно добавлена'});
   }
 
 

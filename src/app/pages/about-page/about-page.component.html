@@ -2,83 +2,135 @@
   <div class="text-center">
     <section class="section-about container d-flex align-items-center">
       <div class="">
-        <div class="decor"></div>
+        <div class="decor-position decor-color"></div>
         <h2 class="text-white text-about">Тишина — единственный простор,<br> где Дух расправляет крылья.</h2>
       </div>
     </section>
 
-    <section class="container mt-5">
+    <section class="container mt-5 ">
       <div class="bg-light p-5 rounded-5">
-        <h2 class="title-about-section">Lorem ipsum dolor sit amet consectetur,<br> adipisicing elit.</h2>
+        <h2 class="title-about-section">Добро пожаловать<br> в мир натурального мыла ручной работы<br> от мастера Тишина!</h2>
 
-        <p class="m-5" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi totam autem iste culpa, commodi eius minus explicabo accusantium amet. Laboriosam cumque officia ullam facilis soluta pariatur est mollitia! Dicta, molestiae. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam atque quas numquam itaque, non neque quidem quaerat delectus reprehenderit animi similique adipisci odit, quae molestiae laborum repudiandae ipsa recusandae architecto! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa pariatur beatae dolore cum tenetur! Assumenda dolore aut necessitatibus quo possimus dolorem iusto, sit, neque iste sequi velit voluptatibus, tenetur delectus?</p>
-        <p class="m-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus explicabo ab vitae culpa veritatis, reiciendis, eligendi at libero non impedit facilis nihil quos aliquid doloribus quas temporibus modi ex optio.</p>
-        <p class="m-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium eveniet deleniti quod ullam qui ex recusandae ut saepe atque adipisci soluta, voluptatum alias quia dolorum autem ratione amet minus. Modi.</p>
+        <p class="m-5 fs-4" >Мастер по фамилии Тишина создает удивительные мыла ручной работы, которые не только ухаживают за кожей, но и радуют глаз своими красивыми формами и ароматами. Каждое мыло изготавливается с любовью и вниманием к деталям.</p>
+        <p class="m-5 fs-4">Для изготовления мыла используются только натуральные ингредиенты высочайшего качества, такие как масла, эфирные масла, травы и цветы. Мастер Тишина следит за каждым этапом процесса производства, чтобы гарантировать безупречное качество и безопасность продукции.</p>
+        <p class="m-5 fs-4">Каждое мыло уникально и имеет свой неповторимый дизайн. От классических форм и ароматов до смелых экспериментов с цветами и текстурами - здесь можно найти мыло на любой вкус и для любого настроения.</p>
+        <p class="m-5 fs-4">Покупая мыло ручной работы от мастера Тишина, вы получаете не просто продукт для ухода за кожей, а настоящее произведение искусства, которое украсит вашу ванную комнату и подарит вам незабываемые моменты ухода за собой.</p>
 
       </div>
 
     </section>
 
 
-    <section class="container mt-5 bg-light">
-      <h3>Новинки</h3>
-      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active ">
-              <div class="d-flex justify-content-around">
-                <app-card-product
-                *ngFor="let product of products | filterProducts: term; let i = index"
-                [product]="product"
-                [ngClass]="{
-                  'active': i === 0
-                }"
-                >
-              </app-card-product>
-              </div>
-            </div>
-            <div class="carousel-item ">
-              <div class="d-flex justify-content-around">
-                <app-card-product
-                *ngFor="let product of products.slice(5) | filterProducts: term; let i = index"
-                [product]="product"
-                [ngClass]="{
-                  'active': i === 0
-                }"
-                >
-              </app-card-product>
-              </div>
-            </div>
+    <section class="container mt-5  bg-light rounded-5">
 
+      <h3 class="pt-5">Познакомтесь с новинками</h3>
+
+      <div class="pt-5 pb-5">
+
+        <p-carousel [value]="products | categoryFilter: 'Новинка' " [numVisible]="3"
+                    [numScroll]="1"
+                    [circular]="true"
+                    [responsiveOptions]="responsiveOptions"
+                    [autoplayInterval]="5000">
+          <ng-template let-product pTemplate="item">
+              <div class="border-1 rounded surface-border border-round m-4  py-5 px-3 card-product card card-item shadow  bg-body-tertiary">
+                  <div class="mb-4  d-flex align-items-center img-container">
+                      <img src="http://localhost:3000/public/{{ product.image }}" [alt]="product.title" class="w-6 shadow-2 img-card" />
+                  </div>
+                  <div>
+                      <h4 class="mb-2 fs-4">{{ product.title }}</h4>
+                      <h6 class="mt-0 mb-3">Цена: {{product.price }} руб.</h6>
+                      <h3 class="text-danger" >{{ product.category }}</h3>
+
+                      <div class="d-flex justify-content-between">
+                        <button class="py-2 px-3 rounded btn"
+                        [disabled]="isExist(product)"
+                        (click)="addToCart(product)"
+                        >
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="25"
+                             height="25"
+                             fill="currentColor"
+                             class="bi bi-cart4"
+                             viewBox="0 0 16 16">
+                          <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                        </svg>
+                        </button>
+
+                        <button class="py-2 px-4 rounded  btn"
+                        (click)="addToFavorites(product)"
+                        [ngClass]="{
+                         'text-danger': product.favorite
+                        }"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                               width="25"
+                               height="25"
+                               fill="currentColor"
+                               class="bi bi-heart-half"
+                               viewBox="0 0 16 16">
+                            <path d="M8 2.748v11.047c3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                          </svg>
+                        </button>
+                      </div>
+                  </div>
+              </div>
+          </ng-template>
+      </p-carousel>
+
+      </div>
+
+    </section>
+
+    <section class="container mt-5 decor-color rounded-5 margin-bottom ">
+
+      <h2 class="text-white pt-5 rounded-5">Предложения для вас</h2>
+      <div class="d-flex align-items-center">
+        <app-carousel></app-carousel>
+      </div>
+
+    </section>
+
+  </div>
+</div>
+
+<!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+      <div class="carousel-item active ">
+        <div class="d-flex justify-content-around">
+          <app-card-product
+          *ngFor="let product of products | filterProducts: term; let i = index"
+          [product]="product"
+          [ngClass]="{
+            'active': i === 0
+          }"
+          >
+        </app-card-product>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Предыдущий</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Следующий</span>
-        </button>
       </div>
-    </section>
+      <div class="carousel-item ">
+        <div class="d-flex justify-content-around">
+          <app-card-product
+          *ngFor="let product of products.slice(5) | filterProducts: term; let i = index"
+          [product]="product"
+          [ngClass]="{
+            'active': i === 0
+          }"
+          >
+        </app-card-product>
+        </div>
+      </div>
 
-    <app-carousel></app-carousel>
-
-    <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" [autoplayInterval]="3000">
-      <ng-template let-product pTemplate="item">
-          <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-              <div class="mb-3">
-                  <img src="http://localhost:3000/public/{{ product.image }}" [alt]="product.title" class="w-6 shadow-2" />
-              </div>
-              <div>
-                  <h4 class="mb-1">{{ product.title }}</h4>
-                  <h6 class="mt-0 mb-3">Цена: {{product.price }} руб.</h6>
-                  <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
-
-              </div>
-          </div>
-      </ng-template>
-  </p-carousel>
-
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Предыдущий</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Следующий</span>
+  </button>
+</div> -->
     <!-- <div class="d-flex justify-content-around flex-wrap mt-5" *ngIf="products">
 
       <app-card-product
@@ -87,5 +139,3 @@
       >
     </app-card-product>
     </div> -->
-  </div>
-</div>

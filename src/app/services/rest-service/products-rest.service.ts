@@ -5,6 +5,7 @@ import { IProduct } from "src/app/models/product";
 import { ErrorService } from "../error.service";
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { IOrder } from "src/app/models/order";
+import { IFavorite } from "src/app/models/favorites";
 
 
 
@@ -43,14 +44,32 @@ export class ProductsRestService {
 
 
   createOrder(data: IOrder): Observable<any> {
-    return this.http.post<{id: string}>("http://localhost:3000/order/", data).pipe(
-      map((response: {id: string}) => {
-        return response.id;
-      })
-    );
+    return this.http.post<{id: string}>("http://localhost:3000/order/", data);
   }
 
   deleteCartProduct(): Observable<Object>{
     return this.http.delete("http://localhost:3000/order/");
   }
+
+  // getFavoritesById(_id: string): Observable<IProduct> {
+  //   return this.http.get<IProduct>("http://localhost:3000/favorites/"+_id);
+  // }
+
+  transferFavoritesToServer(favorites: IProduct[]): Observable<any> {
+    return this.http.post("http://localhost:3000/favorites/", favorites)
+  }
+
+  getAllFavorites(): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>('http://localhost:3000/favorites/');
+   }
+
+   deleteFavoritesProduct(_id: string): Observable<any>{
+    return this.http.delete("http://localhost:3000/favorites/" +_id);
+  }
+
+  deleteAllFavorites(): Observable<any>{
+    return this.http.delete("http://localhost:3000/favorites/");
+  }
 }
+
+

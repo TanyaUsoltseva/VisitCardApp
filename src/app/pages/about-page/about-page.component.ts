@@ -1,6 +1,8 @@
 
 import { Component } from '@angular/core';
 import { IProduct } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
+import { FavoritesService } from 'src/app/services/favorites.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -14,11 +16,11 @@ export class AboutPageComponent {
   responsiveOptions: any[] = [
     {
         breakpoint: '1199px',
-        numVisible: 1,
+        numVisible: 5,
         numScroll: 1
     },
     {
-        breakpoint: '991px',
+        breakpoint: '1025px',
         numVisible: 2,
         numScroll: 1
     },
@@ -29,7 +31,10 @@ export class AboutPageComponent {
     }
 ];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService,
+              private cartService: CartService,
+              private favoritesService: FavoritesService
+              ) {}
 
   ngOnInit(): void {
     this.productsService.getProducts();
@@ -56,6 +61,17 @@ export class AboutPageComponent {
 
 }
 
+addToCart(product: IProduct) {
+  this.cartService.add(product);
+}
+
+isExist(product: IProduct): boolean {
+  return !!this.cartService.products.find((item) => item._id === product._id);
+}
+
+addToFavorites(product: IProduct) {
+  this.favoritesService.add(product);
+}
 
 }
 

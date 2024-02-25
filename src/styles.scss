@@ -4,15 +4,29 @@
   font-family: Madetheartist;
   src: url(assets/fonts/madetheartistscript/Madetheartistscript.ttf) format("opentype");
 }
-.margin-top {
-  margin-top: 6rem;
-}
+
+
+$font-family-sans-serif:
+'Times New Roman', Times, serif;
+
+  :root {
+    --bs-body-font-family: $font-family-sans-serif;
+  }
 
 body {
+  font-family: $font-family-sans-serif;
   background: url(/assets/img/bg1.png);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+.margin-top {
+  margin-top: 6rem;
+}
+
+.margin-bottom {
+  margin-bottom: 6rem;
 }
 
 .card-product {
@@ -27,15 +41,10 @@ body {
 }
 
 .card-img {
-  max-height: 250px;
+height: 250px;
 
 }
 
-.title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 a {
   color: var(--gray-400-ground)!important;
@@ -50,4 +59,8 @@ a {
 
 .p-tabview .p-tabview-nav li {
   border: none
+}
+
+@media (max-width: 900px) {
+
 }

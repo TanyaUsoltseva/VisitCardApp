@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IOrder } from 'src/app/models/order';
 import { IProduct } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -34,13 +34,16 @@ export class CartPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.cart = this.cartService.getProducts();
-    this.cartService.elements$.subscribe(() => this.cart = this.cartService.products) ;
+    this.cartService.elements$.subscribe(() =>{
+      this.cart = this.cartService.products;
+      this.sumUpdate();
+    });
     this.sumUpdate();
 
     this.orderForm = new FormGroup( {
-      name: new FormControl('', ),
-      address: new FormControl('', ),
-      telephone: new FormControl(),
+      name: new FormControl('', {validators: Validators.required}),
+      address: new FormControl('',{validators: Validators.required}),
+      telephone: new FormControl('',{validators: Validators.pattern(/^[\d\+][\d\(\)\ -]{4,14}\d$/)}),
       mail: new FormControl(),
       message: new FormControl()
     });
@@ -68,7 +71,10 @@ export class CartPageComponent implements OnInit{
       ...{userId},
       ...{productId:postData},
     }
-    this.orderService.createOrder(postObj).subscribe();
+    this.orderService.createOrder(postObj).subscribe((order) =>{
+      this.order = order;
+    });
+
 
   }
 

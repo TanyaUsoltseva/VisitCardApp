@@ -30,11 +30,12 @@ export class CardProductComponent implements OnInit {
   }
 
   addToFavorites(productsFavorites: IProduct): void {
-    if (!this.authService.userValue) {
+
+    if (this.authService.userValue) {
       productsFavorites.favorite = !productsFavorites.favorite;
       this.favoritesService.add(productsFavorites)
     } else {
-      this.messageService.add({severity:'warn', summary:'serverError.errorText'});
+      this.messageService.add({severity:'error', summary:'Для добавления в избранное необходимо авторизоваться!'});
     }
   }
 
@@ -63,5 +64,6 @@ export class CardProductComponent implements OnInit {
     this.addToCart(this.product);
     this.sumUpdate.emit(this.product);
   }
+
 
 }

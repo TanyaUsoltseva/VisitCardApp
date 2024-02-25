@@ -10,7 +10,6 @@ export class UserService {
 
   user$ = new BehaviorSubject<IUser | null>(null);
 
-  // private user: IUser;
 
   private token: string;
 

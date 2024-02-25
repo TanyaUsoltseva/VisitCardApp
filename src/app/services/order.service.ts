@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ProductsRestService } from './rest-service/products-rest.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IProduct } from '../models/product';
 import { IOrder } from '../models/order';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class OrderService {
 
   constructor( private productsRestService: ProductsRestService) { }
 
-  createOrder (data: IOrder): Observable<IProduct> {
+  createOrder (data: IOrder): Observable<IOrder> {
     return this.productsRestService.createOrder(data);
   }
 

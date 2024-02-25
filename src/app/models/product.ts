@@ -9,6 +9,7 @@ export interface IProduct {
   count: number,
   forAllPrice: number,
   _id: string,
+  userId?: string,
   rating: {
     rate: number,
     count: number

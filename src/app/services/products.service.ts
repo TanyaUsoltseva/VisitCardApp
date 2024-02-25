@@ -26,7 +26,7 @@ export class ProductsService {
     })
   }
 
-  getTicketById(id: string): Observable<IProduct>{
+  getProductById(id: string): Observable<IProduct>{
     return this.productsRestService.getProductById(id);
   }
 

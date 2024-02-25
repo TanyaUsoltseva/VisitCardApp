@@ -27,6 +27,8 @@ import { MessagesModule } from 'primeng/messages';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
+import { CategoryFilterPipe } from './pipes/category-filter.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { TagModule } from 'primeng/tag';
     CarouselComponent,
     AuthorizationComponent,
     RegistrationComponent,
-    AdminComponent
+    AdminComponent,
+    CategoryFilterPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
